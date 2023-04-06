@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MobyLabWebProgramming.Infrastructure.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MobyLabWebProgramming.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDatabaseContext))]
-    partial class WebAppDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230406141444_EntitiesAdded")]
+    partial class EntitiesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,33 +221,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.UserFavoriteProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserFavoriteProduct");
-                });
-
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.UserFile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -342,25 +317,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.UserFavoriteProduct", b =>
-                {
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.Product", "Product")
-                        .WithMany("FavoritedByUsers")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MobyLabWebProgramming.Core.Entities.User", "User")
-                        .WithMany("FavoriteProducts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.UserFile", b =>
                 {
                     b.HasOne("MobyLabWebProgramming.Core.Entities.User", "User")
@@ -379,8 +335,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.Product", b =>
                 {
-                    b.Navigation("FavoritedByUsers");
-
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Orders");
@@ -388,8 +342,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
 
             modelBuilder.Entity("MobyLabWebProgramming.Core.Entities.User", b =>
                 {
-                    b.Navigation("FavoriteProducts");
-
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Orders");

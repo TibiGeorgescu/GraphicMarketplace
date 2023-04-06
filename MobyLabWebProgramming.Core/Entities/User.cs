@@ -21,4 +21,6 @@ public class User : BaseEntity
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new HashSet<Feedback>();
     public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     public virtual Profile Profile { get; set; }
+    public ICollection<UserFavoriteProduct> FavoriteProducts { get; set; } = new List<UserFavoriteProduct>();
+
 }

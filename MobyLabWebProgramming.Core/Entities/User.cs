@@ -18,17 +18,4 @@ public class User : BaseEntity
     /// Note that this field will be null if not explicitly requested via a Include query, also note that the property is used by the ORM, in the database this collection doesn't exist. 
     /// </summary>
     public ICollection<UserFile> UserFiles { get; set; } = default!;
-    public ICollection<Product> Products { get; set; } = default!;
-    public virtual ICollection<Feedback> SentFeedbacks { get; set; }
-    public virtual ICollection<Feedback> ReceivedFeedbacks { get; set; }
-    public virtual ICollection<Order> Orders { get; set; }
-
-}
-
-public class UserProfile
-{
-    public int Id { get; set; }
-    public string Address { get; set; }
-    public string PhoneNumber { get; set; }
-    public virtual User User { get; set; }
 }

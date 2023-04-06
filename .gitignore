@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 TempDocuments/
+/MobyLabWebProgramming.Core/Entities/Category.cs

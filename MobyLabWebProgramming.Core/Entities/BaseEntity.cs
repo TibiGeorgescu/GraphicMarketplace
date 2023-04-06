@@ -11,7 +11,8 @@ public abstract class BaseEntity
     /// The Id property is a unique identifier for each entity, usually all database tables use a primary key to index data.
     /// Also, the primary key is used by the ORM to uniquely identify the entity instance and track the changes to it.
     /// </summary>
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
+
 
     /// <summary>
     /// The CreatedAt property represents the date and time when the entity was created.

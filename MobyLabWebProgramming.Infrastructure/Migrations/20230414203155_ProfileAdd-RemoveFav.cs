@@ -5,17 +5,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MobyLabWebProgramming.Infrastructure.Migrations
 {
-    public partial class FavouriteProducts : Migration
+    public partial class ProfileAddRemoveFav : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "UserFavoriteProduct");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "UserFavoriteProduct",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -45,12 +51,6 @@ namespace MobyLabWebProgramming.Infrastructure.Migrations
                 name: "IX_UserFavoriteProduct_UserId",
                 table: "UserFavoriteProduct",
                 column: "UserId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "UserFavoriteProduct");
         }
     }
 }

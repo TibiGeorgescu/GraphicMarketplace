@@ -22,7 +22,6 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfigurations
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<UserFavoriteProduct> UserFavoriteProducts{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -57,18 +56,7 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfigurations
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId);
 
-            modelBuilder.Entity<UserFavoriteProduct>(builder =>
-            {
-                builder.HasKey(u => new { u.UserId, u.ProductId });
-
-                builder.HasOne(u => u.User)
-                    .WithMany(u => u.FavoriteProducts)
-                    .HasForeignKey(u => u.UserId);
-
-                builder.HasOne(u => u.Product)
-                    .WithMany(p => p.FavoritedByUsers)
-                    .HasForeignKey(u => u.ProductId);
-            });
+          
         }
     }
 }

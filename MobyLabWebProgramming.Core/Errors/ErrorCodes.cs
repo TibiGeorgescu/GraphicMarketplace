@@ -12,6 +12,8 @@ public enum ErrorCodes
     TechnicalError,
     EntityNotFound,
     PhysicalFileNotFound,
+    ProductAlreadyExists,
+    CategoryAlreadyExists,
     UserAlreadyExists,
     WrongPassword,
     CannotAdd,

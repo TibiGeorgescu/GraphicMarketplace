@@ -60,6 +60,7 @@ public class ProductService : IProductService
             Name = Product.Name,
             Description = Product.Description,
             Price = Product.Price,
+            CategoryId = Product.categoryId,
         }, cancellationToken);
 
         return ServiceResponse.ForSuccess();

@@ -13,6 +13,7 @@ public enum ErrorCodes
     EntityNotFound,
     PhysicalFileNotFound,
     ProductAlreadyExists,
+    ProfileAlreadyExists,
     CategoryAlreadyExists,
     UserAlreadyExists,
     WrongPassword,

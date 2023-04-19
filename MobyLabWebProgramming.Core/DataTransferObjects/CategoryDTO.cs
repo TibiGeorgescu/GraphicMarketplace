@@ -8,6 +8,6 @@ namespace MobyLabWebProgramming.Core.DataTransferObjects;
 
 public class CategoryDTO
 {
-    Guid Id { get; set; }
-    public string Name { get; set; }
+    public Guid Id { get; set; }
+    public string? Name { get; set; }
 }

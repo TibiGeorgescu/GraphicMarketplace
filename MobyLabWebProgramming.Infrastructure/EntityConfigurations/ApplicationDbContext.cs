@@ -16,7 +16,6 @@ namespace MobyLabWebProgramming.Infrastructure.EntityConfigurations
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<UserFile> UserFiles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }

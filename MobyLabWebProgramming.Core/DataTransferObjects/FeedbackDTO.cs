@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace MobyLabWebProgramming.Core.DataTransferObjects;
 
-public class FeedbackAddDTO
+public class FeedbackDTO
 {
+    public Guid Id { get; set; }
     public Guid UserId { get; set; }
-    public string Content { get; set; }
-    public int Rating { get; set; }
+    public string? Content { get; set; }
+    public int? Rating { get; set; }
     public Guid ProductId { get; set; }
 }

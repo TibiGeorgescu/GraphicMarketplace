@@ -17,7 +17,6 @@ public class User : BaseEntity
     /// Collection such as this can be used for Many-To-One or Many-To-Many relations.
     /// Note that this field will be null if not explicitly requested via a Include query, also note that the property is used by the ORM, in the database this collection doesn't exist. 
     /// </summary>
-    public ICollection<UserFile> UserFiles { get; set; } = default!;
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new HashSet<Feedback>();
     public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     public virtual Profile Profile { get; set; }

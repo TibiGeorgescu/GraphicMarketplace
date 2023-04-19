@@ -65,20 +65,19 @@ public class CategoryService : ICategoryService
 
     public async Task<ServiceResponse> UpdateCategory(CategoryDTO Category, UserDTO? requestingUser, CancellationToken cancellationToken = default)
     {
-        //if (requestingCategory != null && requestingCategory.Role != CategoryRoleEnum.Admin && requestingCategory.Id != Category.Id) // Verify who can add the Category, you can change this however you se fit.
-        //{
-        //    return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin or the own Category can update the Category!", ErrorCodes.CannotUpdate));
-        //}
+        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Admin && requestingUser.Id != Category.Id) // Verify who can add the Category, you can change this however you se fit.
+        {
+            return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin or the own Category can update the Category!", ErrorCodes.CannotUpdate));
+        }
 
-        //var entity = await _repository.GetAsync(new CategorySpec(Category.Id), cancellationToken);
+        var entity = await _repository.GetAsync(new CategorySpec(Category.Id), cancellationToken);
 
-        //if (entity != null) // Verify if the Category is not found, you cannot update an non-existing entity.
-        //{
-        //    entity.Name = Category.Name ?? entity.Name;
-        //    entity.Password = Category.Password ?? entity.Password;
+        if (entity != null) // Verify if the Category is not found, you cannot update an non-existing entity.
+        {
+            entity.Name = Category.Name ?? entity.Name;
 
-        //    await _repository.UpdateAsync(entity, cancellationToken); // Update the entity and persist the changes.
-        //}
+            await _repository.UpdateAsync(entity, cancellationToken); // Update the entity and persist the changes.
+        }
 
         return ServiceResponse.ForSuccess();
     }

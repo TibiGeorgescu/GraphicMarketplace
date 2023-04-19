@@ -60,6 +60,7 @@ public class ProductService : IProductService
             Name = Product.Name,
             Description = Product.Description,
             Price = Product.Price,
+            CategoryId = Product.categoryId,
         }, cancellationToken);
 
         return ServiceResponse.ForSuccess();
@@ -67,20 +68,20 @@ public class ProductService : IProductService
 
     public async Task<ServiceResponse> UpdateProduct(ProductDTO Product, UserDTO? requestingUser, CancellationToken cancellationToken = default)
     {
-        //if (requestingProduct != null && requestingProduct.Role != ProductRoleEnum.Admin && requestingProduct.Id != Product.Id) // Verify who can add the Product, you can change this however you se fit.
-        //{
-        //    return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin or the own Product can update the Product!", ErrorCodes.CannotUpdate));
-        //}
+        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Admin && requestingUser.Id != Product.Id) // Verify who can add the Product, you can change this however you se fit.
+        {
+            return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin or the own Product can update the Product!", ErrorCodes.CannotUpdate));
+        }
 
-        //var entity = await _repository.GetAsync(new ProductSpec(Product.Id), cancellationToken);
+        var entity = await _repository.GetAsync(new ProductSpec(Product.Id), cancellationToken);
 
-        //if (entity != null) // Verify if the Product is not found, you cannot update an non-existing entity.
-        //{
-        //    entity.Name = Product.Name ?? entity.Name;
-        //    entity.Password = Product.Password ?? entity.Password;
-
-        //    await _repository.UpdateAsync(entity, cancellationToken); // Update the entity and persist the changes.
-        //}
+        if (entity != null) // Verify if the Product is not found, you cannot update an non-existing entity.
+        {
+            entity.Name = Product.Name ?? entity.Name;
+            entity.Price = Product.Price ?? entity.Price;
+            entity.Description = Product.Description ?? entity.Description;
+            await _repository.UpdateAsync(entity, cancellationToken); // Update the entity and persist the changes.
+        }
 
         return ServiceResponse.ForSuccess();
     }

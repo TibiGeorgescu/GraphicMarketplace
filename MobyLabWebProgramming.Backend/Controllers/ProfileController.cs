@@ -20,9 +20,15 @@ public class ProfileController : AuthorizedController // Here we use the Authori
     /// <summary>
     /// Inject the required services through the constructor.
     /// </summary>
+<<<<<<< HEAD
     public ProfileController(IProfileService _ProfileService, IUserService userService) : base(userService) // Also, you may pass constructor parameters to a base class constructor and call as specific constructor from the base class.
     {
         ProfileService = _ProfileService;
+=======
+    public ProfileController(IProfileService ProfileService, IUserService userService) : base(userService) // Also, you may pass constructor parameters to a base class constructor and call as specific constructor from the base class.
+    {
+        ProfileService = ProfileService;
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
     }
 
     /// <summary>
@@ -66,6 +72,10 @@ public class ProfileController : AuthorizedController // Here we use the Authori
         var currentUser = await GetCurrentUser();
 
         return currentUser.Result != null ?
+<<<<<<< HEAD
+=======
+
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
             this.FromServiceResponse(await ProfileService.AddProfile(Profile, currentUser.Result)) :
             this.ErrorMessageResult(currentUser.Error);
     }

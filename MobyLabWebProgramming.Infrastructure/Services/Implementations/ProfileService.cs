@@ -48,6 +48,7 @@ public class ProfileService : IProfileService
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin can add Profiles!", ErrorCodes.CannotAdd));
         }
 
+<<<<<<< HEAD
         var result = await _repository.GetAsync(new UserSpec(Profile.UserId), cancellationToken);
 
         if (result == null)
@@ -59,6 +60,11 @@ public class ProfileService : IProfileService
         var result2 = await _repository.GetAsync(new ProfileSpec(Profile.UserId, Profile.FirstName), cancellationToken);
 
         if (result2 != null)
+=======
+        var result = await _repository.GetAsync(new ProfileSpec(Profile.FirstName, Profile.LastName), cancellationToken);
+
+        if (result != null)
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Conflict, "The Profile already exists!", ErrorCodes.ProfileAlreadyExists));
         }
@@ -69,7 +75,11 @@ public class ProfileService : IProfileService
             LastName = Profile.LastName,
             Address = Profile.Address,
             PhoneNumber = Profile.PhoneNumber,
+<<<<<<< HEAD
             UserId = Profile.UserId,
+=======
+            UserId = Profile.UserId
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
         }, cancellationToken);
 
         return ServiceResponse.ForSuccess();
@@ -77,6 +87,7 @@ public class ProfileService : IProfileService
 
     public async Task<ServiceResponse> UpdateProfile(ProfileDTO Profile, UserDTO? requestingUser, CancellationToken cancellationToken = default)
     {
+<<<<<<< HEAD
         if (requestingUser != null && requestingUser.Role != UserRoleEnum.Admin && requestingUser.Id != Profile.Id) // Verify who can add the Profile, you can change this however you se fit.
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin or the own Profile can update the Profile!", ErrorCodes.CannotUpdate));
@@ -93,6 +104,22 @@ public class ProfileService : IProfileService
             
             await _repository.UpdateAsync(entity, cancellationToken); // Update the entity and persist the changes.
         }
+=======
+        //if (requestingProfile != null && requestingProfile.Role != ProfileRoleEnum.Admin && requestingProfile.Id != Profile.Id) // Verify who can add the Profile, you can change this however you se fit.
+        //{
+        //    return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only the admin or the own Profile can update the Profile!", ErrorCodes.CannotUpdate));
+        //}
+
+        //var entity = await _repository.GetAsync(new ProfileSpec(Profile.Id), cancellationToken);
+
+        //if (entity != null) // Verify if the Profile is not found, you cannot update an non-existing entity.
+        //{
+        //    entity.Name = Profile.Name ?? entity.Name;
+        //    entity.Password = Profile.Password ?? entity.Password;
+
+        //    await _repository.UpdateAsync(entity, cancellationToken); // Update the entity and persist the changes.
+        //}
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
 
         return ServiceResponse.ForSuccess();
     }

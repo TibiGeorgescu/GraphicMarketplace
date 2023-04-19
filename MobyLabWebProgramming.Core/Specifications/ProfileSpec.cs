@@ -1,6 +1,9 @@
 ﻿using MobyLabWebProgramming.Core.Entities;
 using Ardalis.Specification;
+<<<<<<< HEAD
 using System.Xml.Linq;
+=======
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
 
 namespace MobyLabWebProgramming.Core.Specifications;
 
@@ -14,8 +17,14 @@ public sealed class ProfileSpec : BaseSpec<ProfileSpec, Profile>
     {
     }
 
+<<<<<<< HEAD
     public ProfileSpec(Guid UserId, string FirstName)
     {
         Query.Where(e => e.UserId == UserId);
+=======
+    public ProfileSpec(string firstname, string lastname)
+    {
+        Query.Where(e => (e.FirstName == firstname && e.LastName == lastname));
+>>>>>>> dce5d55beda079ed5a7cf7f9861e0b1d6a191f40
     }
 }
